@@ -29,12 +29,11 @@ def scan(ip):
 def portScanner(ip, end_port):
     port = 1
     port_list = []
+    active_ports = []
 
     while port <= end_port:
-       target_ip = scapy.IP(dst=ip)
-       target_port = scapy.TCP(dport=port,flags="S")
-       syn_packet = target_ip/target_port
-       resp = scapy.sr1(syn_packet)
+       syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
+       resp = scapy.sr1(syn_packet, verbose=0)
        resp = resp.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
        resp = resp.replace('SA', 'OPEN')
        ip_addr, port_name, status = resp.split('\t')
@@ -42,7 +41,11 @@ def portScanner(ip, end_port):
        port_list.append(resp_dict)
        port = port + 1
     
-    return port_list
+    for element in port_list:
+        if element.get("status") == "OPEN":
+            active_ports.append(element)
+            
+    return active_ports
       
 
 
@@ -56,10 +59,10 @@ def print_ipScan(active_hosts):
     for host in active_hosts:
         print(host["ip"] + "\t\t" + host["mac"])
 
-#todo set up to format the port list
-def print_portScan(port_list):
+#todo set up to format the open ports on the list
+def print_portScan(active_ports):
     print("\n\nIP\t\t\tPort\t\t\tStatus")
-    print("------------------------------------------")
+    print("----------------------------------------------------------")
     for port in active_ports:
         print(port["ip"] + "\t\t" + port["port"] + "\t\t" + port["status"])
 
@@ -78,8 +81,9 @@ print("------------------------------------------\n\n\n\n")
 target = input("\tEnter a target IP range: ")
 scanner = scan(target)
 print_ipScan(scanner)
-portScanner("192.168.0.190", 100)
-print(print_portScan)
+Pscanner = portScanner("192.168.0.190", 100)
+print(len(Pscanner))
+print(print_portScan(Pscanner))
 
 
 
