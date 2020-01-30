@@ -25,12 +25,10 @@ def scan(ip):
         active_hosts.append(host_dict)
     return active_hosts
 
-
 def portScanner(ip, end_port):
     port = 1
     port_list = []
     active_ports = []
-
     while port <= end_port:
        syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
        resp = scapy.sr1(syn_packet, verbose=0)
@@ -44,16 +42,10 @@ def portScanner(ip, end_port):
     for element in port_list:
         if element.get("status") == "OPEN":
             active_ports.append(element)
-            
     return active_ports
       
-
-
-
-
 #* formats the scan results for the user
 def print_ipScan(active_hosts):
-    print(active_hosts)
     print("\n\nIP\t\t\tMAC Address")
     print("------------------------------------------")
     for host in active_hosts:
@@ -73,7 +65,6 @@ def get_arguments():
         options = parser.parse_args()
         return options
 '''
-
 
 os.system('clear')
 os.system('figlet Net Scout')
