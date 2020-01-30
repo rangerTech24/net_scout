@@ -76,7 +76,7 @@ def get_arguments():
 
 
 os.system('clear')
-os.system('figlet "Net Scout" -f slant')
+os.system('figlet Net Scout')
 print("------------------------------------------\n\n\n\n")
 target = input("\tEnter a target IP range: ")
 scanner = scan(target)
