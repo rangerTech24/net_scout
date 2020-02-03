@@ -73,7 +73,6 @@ target = input("\tEnter a target IP range: ")
 scanner = scan(target)
 print_ipScan(scanner)
 Pscanner = portScanner("192.168.0.190", 100)
-print(len(Pscanner))
 print(print_portScan(Pscanner))
 
 
