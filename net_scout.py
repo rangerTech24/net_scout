@@ -44,8 +44,8 @@ def print_ipScan(active_hosts): # prints IP scan results to command line.
         print(element["ip"] + "\t\t" + element["mac"])
 
 def print_portScan(active_ports): # prints port scan results to command line.
-    print("\n\nIP\t\t\tPort\t\t\tStatus")
-    print("----------------------------------------------------------")
+    print("\n\nIP\t\t\tPort\t\tStatus")
+    print("-----------------------------------------------")
     for element in active_ports:
         if element == "None":
             print("Scan Complete")
@@ -62,7 +62,7 @@ def get_arguments():
 
 os.system('clear')
 os.system('figlet Net Scout')
-print("------------------------------------------\n")
+print("---------------------------------------------\n")
 options = get_arguments()
 if options.type == "False":
     scanner = scan(options.target)
