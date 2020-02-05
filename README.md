@@ -2,10 +2,8 @@
   python network scanner
   
   ## Required Modules
-     ..* scapy
-      
-      
-            pip3 install scapy
+  ###scapy
+  pip3 install scapy
    
       ### progress
     
