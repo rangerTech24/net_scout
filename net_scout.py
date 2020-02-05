@@ -8,7 +8,7 @@ import argparse
 def net_scan(ip):  #Scans network for active hosts   
     active_hosts = [] 
     arp_packet = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")/scapy.ARP(pdst=ip)
-    responses = scapy.srp(arp_packet, timeout=40, verbose=False)[0]     
+    responses = scapy.srp(arp_packet, timeout=60, verbose=False)[0]     
     for element in responses:  #Parses through each element in responses and saves the IP and MAC values to host_dict
         host_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
         active_hosts.append(host_dict)
