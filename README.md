@@ -11,7 +11,7 @@
     
   ## Functions
       
-   + ⋅⋅⋅net_scan(ip)
+   ⋅⋅⋅net_scan(ip)
       
    + port_scan(ip, end_port)
       
