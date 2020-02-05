@@ -1,7 +1,7 @@
 # net_scout
   python network scanner
   
-  ## Required Modules
+  ## Dependencies
   
    #### scapy
     pip3 install scapy
