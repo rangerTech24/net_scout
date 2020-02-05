@@ -8,7 +8,7 @@ import argparse
 def net_scan(ip):  #Scans network for active hosts   
     active_hosts = [] 
     arp_packet = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")/scapy.ARP(pdst=ip)
-    responses = scapy.srp(arp_packet, timeout=10, verbose=False)[0]     
+    responses = scapy.srp(arp_packet, timeout=40, verbose=False)[0]     
     for element in responses:  #Parses through each element in responses and saves the IP and MAC values to host_dict
         host_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
         active_hosts.append(host_dict)
@@ -19,7 +19,7 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
     port = 1
     port_list = []
     active_ports = []
-    with IncrementalBar("scanning ports...", index=port,max=end_port, suffix='%(percent)d%%') as bar:
+    with IncrementalBar("scanning ports...",index=port,max=end_port,suffix='%(percent)d%%') as bar:
         while port <= end_port:
             syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
             resp = scapy.sr1(syn_packet, verbose=0, timeout=3)
