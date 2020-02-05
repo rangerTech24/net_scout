@@ -13,12 +13,10 @@
       
    #### net_scan(ip)
    
-       ###### > Uses the ARP Ping method to discover active hosts on a network. 
-   
-      ```
-      sudo python3 net_scout.py -t <ip_address_range>
-      ```
-      
+   ###### Uses the ARP Ping method to discover active hosts on a network. 
+   ```
+   sudo python3 net_scout.py -t <ip_address_range>
+   ```
    + port_scan(ip, end_port)
       
    + get_arguments()
