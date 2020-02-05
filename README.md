@@ -1,22 +1,21 @@
 # net_scout
   python network scanner
   
-  ## Required Modules: 
-  
-      #### scapy
+  ## Required Modules
+     ..* scapy
       
-          ```
+      
             pip3 install scapy
-          ```
-      #### progress
-      
-          ```
+   
+      ### progress
+    
+          
             pip3 install progress
-           ```
+          
       
       
       
-  ## Functions: 
+  ## Functions
       
       + net_scan(ip)
       
