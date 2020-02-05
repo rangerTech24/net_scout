@@ -2,27 +2,23 @@
   python network scanner
   
   ## Required Modules
-  ###scapy
-  pip3 install scapy
-   
-      ### progress
+  
+   ### scapy
+    pip3 install scapy
     
-          
-            pip3 install progress
-          
-      
-      
-      
+   ### progress
+    pip3 install progress
+    
   ## Functions
       
-      + net_scan(ip)
+   + net_scan(ip)
       
-      + port_scan(ip, end_port)
+   + port_scan(ip, end_port)
       
-      + get_arguments()
+   + get_arguments()
       
-      + print_net_scan()
+   + print_net_scan()
       
-      + print_port_scan()
+   + print_port_scan()
       
      
