@@ -34,7 +34,9 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
             #if resp is None: #error checking for resp timeouts
             #    continue
             syn_packet = scapy.sr1(scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S"),verbose=0, timeout=1) 
-            if(str(type(syn_packet))=="<type 'NoneType'>"):
+            if(str(type(syn_packet))!="<class 'scapy.layers.inet.IP'>"):
+                port = port + 1
+                bar.next()
                 continue
             resp = syn_packet.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
             #print(resp)
