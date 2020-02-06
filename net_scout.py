@@ -2,7 +2,6 @@
 import os
 import scapy.all as scapy
 from progress.bar import IncrementalBar
-import click
 import argparse
 
 def scan(ip): #Info: Scans network for active hosts   
