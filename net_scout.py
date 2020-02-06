@@ -12,8 +12,8 @@ def net_scan(ip):  #Scans network for active hosts
     spinner.start()
     active_hosts = [] 
     arp_packet = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")/scapy.ARP(pdst=ip)
-    responses = scapy.srp(arp_packet, timeout=60, verbose=False)[0] 
-    responses.summary()   
+    responses = scapy.srp(arp_packet, timeout=20, verbose=False)[0] 
+    responses.summary()  #print test to show arp broadcast  
     for element in responses:  #Parses through each element in responses and saves the IP and MAC values to host_dict
         host_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
         active_hosts.append(host_dict)
