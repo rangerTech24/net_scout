@@ -6,13 +6,13 @@ from yaspin import yaspin
 import argparse
 
 
-def net_scan(ip):  #Scans network for active hosts 
+def net_scan(ip, tout):  #Scans network for active hosts 
      
     spinner = yaspin(text="Scanning Network", color="green")
     spinner.start()
     active_hosts = [] 
     arp_packet = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")/scapy.ARP(pdst=ip)
-    responses = scapy.srp(arp_packet, timeout=20, verbose=False)[0] 
+    responses = scapy.srp(arp_packet, timeout=tout, verbose=False)[0] 
     responses.summary()  #print test to show arp broadcast  
     for element in responses:  #Parses through each element in responses and saves the IP and MAC values to host_dict
         host_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
@@ -73,8 +73,9 @@ def print_port_scan(active_ports):  #prints port_scan() results to command line.
 def get_arguments():  #parses the command line arguments
         parser = argparse.ArgumentParser()
         parser.add_argument("--port", dest="type", action="store_true", default="False", help="The -ps flag is used to run a port scan | default=false")
-        parser.add_argument("-t", dest="target", help="Target IP range ---> [192.168.0.1/24] | ** do not include CIDR notation when running a port scan **")
+        parser.add_argument("-t", dest="target", help="Target IP range ---> [192.168.0.1/24] or single host for port scan [192.168.0.1] **")
         parser.add_argument("-m", dest="max", default="1024", type=int, help="Max port to scan | default=1024")
+        parser.add_argument("-to", dest="timeout", default="5", type=int, help="timeout of scan")
         options = parser.parse_args()
         return options
 
@@ -84,7 +85,7 @@ os.system('figlet Net Scout')
 print("---------------------------------------------\n")
 options = get_arguments()
 if options.type == "False":
-    scanner = net_scan(options.target)
+    scanner = net_scan(options.target, options.timeout)
     print_net_scan(scanner)
 else:
     Pscanner = port_scan(options.target, options.max)
