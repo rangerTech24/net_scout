@@ -28,7 +28,7 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
     with IncrementalBar("scanning ports...",index=port,max=end_port,suffix='%(percent)d%%') as bar:
         while port <= end_port:
             #syn_packet.show()
-            syn_packet = scapy.sr1(scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S"),verbose=0, timeout=.02) 
+            syn_packet = scapy.sr1(scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S"),verbose=0, timeout=.05) 
             if(str(type(syn_packet))!="<class 'scapy.layers.inet.IP'>"):
                 port = port + 1
                 bar.next()
