@@ -44,12 +44,12 @@
    
    ###### uses argparse module to parse the command line arguments entered when script is executed.
    
-   Flag | Name | Scan type | optional | description
+   Flag | Name | Scan Type | Optional | Description
    --- | --- | --- | --- | ---
-   -m  | MAX | port_scan | yes | port_scan function scans from port 1 ---> MAX. Defaults to 1024.
-   -t  | TARGET | BOTH | no |net_scan requires CIDR notation & port_scan requires single address.
-   -to | TIMEOUT | net_scan | yes | timeout of scapy sr1() scan. Defaults to 5 seconds.
-   --port | TYPE | port_scan | yes | Tells script you are trying to run a port_scan.
+   -m  | MAX | port_scan | yes | a P_S scans from port 1 ---> MAX. Defaults to 1024.
+   -t  | TARGET | both | no |N_S targets a range of ips & P_S targets one ip.
+   -to | TIMEOUT | net_scan | yes | Timeout of scapy sr1() scan. Defaults to 5 seconds.
+   --port | TYPE | port_scan | yes | Tells script to run a P_S.
    ```
       
    
