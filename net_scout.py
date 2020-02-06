@@ -29,7 +29,7 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
         while port <= end_port:
             syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
             #syn_packet.show()
-            resp = scapy.sr1(syn_packet, verbose=0, timeout=10)
+            resp = scapy.sr1(syn_packet, verbose=0, timeout=1)
             #print(resp)
             if resp is None: #error checking for resp timeouts
                 continue
