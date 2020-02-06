@@ -27,16 +27,17 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
     active_ports = []
     with IncrementalBar("scanning ports...",index=port,max=end_port,suffix='%(percent)d%%') as bar:
         while port <= end_port:
-            syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
+            #syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
             #syn_packet.show()
-            resp = scapy.sr1(syn_packet, verbose=0, timeout=1)
+            #resp = scapy.sr1(syn_packet, verbose=0, timeout=1)
             #print(resp)
             #if resp is None: #error checking for resp timeouts
             #    continue
-            if(str(type(resp))=="<type 'NoneType'>"):
-                break
-            resp = resp.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
-            print(resp)
+            syn_packet = scapy.sr1(scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S"),verbose=0, timeout=1) 
+            if(str(type(syn_packet))=="<type 'NoneType'>"):
+                continue
+            resp = syn_packet.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
+            #print(resp)
             resp = resp.replace('SA', 'OPEN')
             ip_addr, port_name, status = resp.split('\t')
             resp_dict={"ip": ip_addr, "port": port_name, "status": status}
