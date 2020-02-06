@@ -31,8 +31,8 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
             #syn_packet.show()
             resp = scapy.sr1(syn_packet, verbose=0, timeout=1)
             #print(resp)
-            if resp is None: #error checking for resp timeouts
-                continue
+            #if resp is None: #error checking for resp timeouts
+            #    continue
             resp = resp.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
             print(resp)
             resp = resp.replace('SA', 'OPEN')
