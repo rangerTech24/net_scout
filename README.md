@@ -24,9 +24,6 @@
    ```
    sudo python3 net_scout.py -t <ip_address_range> -to <timeout>
    ```
-   ### ---> print_net_scan(active_hosts)
-   
-   ###### Formats the results of net_scan
    
    ### --->  port_scan(ip, end_port)
 
@@ -36,13 +33,6 @@
    ```
    sudo python3 net_scout.py --port -t <ip_address> -m <max_port_number>
    ```
-   ### ---> print_port_scan(active_ports)
-   
-   ######
-      
-   ### ---> get_arguments()
-   
-   ###### uses argparse module to parse the command line arguments entered when script is executed.
    
    Flag | Name | Scan Type | Optional | Description
    --- | --- | --- | --- | ---
@@ -50,7 +40,17 @@
    -t  | TARGET | both | no |N_S targets a range of ips & P_S targets one ip.
    -to | TIMEOUT | net_scan | yes | Timeout of scapy sr1() scan. Defaults to 5 seconds.
    --port | TYPE | port_scan | yes | Tells script to run a P_S.
-   ```
+   
+   ### ---> print_net_scan(active_hosts)
+   ###### Formats the results of a net_scan.
+   
+   ### ---> print_port_scan(active_ports)
+   ###### Formats the results of port_scan.
+      
+   ### ---> get_arguments()
+   ###### uses argparse module to parse the command line arguments entered when script is executed.
+   
+
       
    
       
