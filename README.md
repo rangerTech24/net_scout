@@ -45,7 +45,7 @@
    ###### uses argparse module to parse the command line arguments entered when script is executed.
    
    Flag | Name | Scan type | optional | description
-   --- | --- | --- | ---
+   --- | --- | --- | --- | ---
    -m  | MAX | port_scan | yes | port_scan function scans from port 1 ---> MAX. Defaults to 1024.
    -t  | TARGET | BOTH | no |net_scan requires CIDR notation & port_scan requires single address.
    -to | TIMEOUT | net_scan | yes | timeout of scapy sr1() scan. Defaults to 5 seconds.
