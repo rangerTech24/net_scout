@@ -22,17 +22,12 @@ def net_scan(ip, tout):  #Scans network for active hosts
 
 
 def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and looks for SYN-ACK responses to indicate open ports
-    port = 20
+    port = 1
     port_list = []
     active_ports = []
     with IncrementalBar("scanning ports...",index=port,max=end_port,suffix='%(percent)d%%') as bar:
         while port <= end_port:
-            #syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
             #syn_packet.show()
-            #resp = scapy.sr1(syn_packet, verbose=0, timeout=1)
-            #print(resp)
-            #if resp is None: #error checking for resp timeouts
-            #    continue
             syn_packet = scapy.sr1(scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S"),verbose=0, timeout=1) 
             if(str(type(syn_packet))!="<class 'scapy.layers.inet.IP'>"):
                 port = port + 1
