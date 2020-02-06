@@ -2,16 +2,22 @@
 import os
 import scapy.all as scapy
 from progress.bar import IncrementalBar
+from yaspin import yaspin
 import argparse
 
 
-def net_scan(ip):  #Scans network for active hosts   
+def net_scan(ip):  #Scans network for active hosts 
+     
+    spinner = yaspin(text="Scanning Network", color="green")
+    spinner.start()
     active_hosts = [] 
     arp_packet = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")/scapy.ARP(pdst=ip)
-    responses = scapy.srp(arp_packet, timeout=60, verbose=False)[0]     
+    responses = scapy.srp(arp_packet, timeout=60, verbose=False)[0] 
+    responses.summary()   
     for element in responses:  #Parses through each element in responses and saves the IP and MAC values to host_dict
         host_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
         active_hosts.append(host_dict)
+    spinner.stop()
     return active_hosts
 
 
@@ -22,7 +28,7 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
     with IncrementalBar("scanning ports...",index=port,max=end_port,suffix='%(percent)d%%') as bar:
         while port <= end_port:
             syn_packet = scapy.IP(dst=ip)/scapy.TCP(dport=port,flags="S")
-            resp = scapy.sr1(syn_packet, verbose=0, timeout=3)
+            resp = scapy.sr1(syn_packet, verbose=0, timeout=20)
             if resp is None: #error checking for resp timeouts
                 continue
             resp = resp.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
@@ -40,10 +46,15 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
 
 
 def print_net_scan(active_hosts):  #prints net_scan() results to command line.
+    host_num = 0
     print("\n\nIP\t\t\tMAC Address")
     print("------------------------------------------")
     for element in active_hosts:
         print(element["ip"] + "\t\t" + element["mac"])
+        host_num = host_num + 1
+    print("------------------------------------------")
+    print("\t---> Active hosts discovered:", host_num)
+    print("\t---> Scan Complete\n")
 
 
 def print_port_scan(active_ports):  #prints port_scan() results to command line.
