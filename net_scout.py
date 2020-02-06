@@ -34,7 +34,7 @@ def port_scan(ip, end_port):  #Sends SYN packets to specified port numbers and l
             #if resp is None: #error checking for resp timeouts
             #    continue
             if(str(type(resp))=="<type 'NoneType'>"):
-                continue
+                break
             resp = resp.sprintf('%IP.src%\t%TCP.sport%\t%TCP.flags%')
             print(resp)
             resp = resp.replace('SA', 'OPEN')
