@@ -35,11 +35,11 @@
    ```
    
    Flag | Name | Scan Type | Optional | Description
-   :---:| --- | --- | --- | ---
-   -m  | MAX | port_scan | yes | a P_S scans from port 1 ---> MAX. Defaults to 1024.
-   -t  | TARGET | both | no |N_S targets a range of ips & P_S targets one ip.
-   -to | TIMEOUT | net_scan | yes | Timeout of scapy sr1() scan. Defaults to 5 seconds.
-   --port | TYPE | port_scan | yes | Tells script to run a P_S.
+   :---:|:---:|:---:|:---:|:---:
+   -m  | MAX | port_scan | yes | Sets Max port to scan to. port_scan() starts port 1 and scans up to the specified MAX. Defaults to 1024.
+   -t  | TARGET | both | no |net_scan() targets a range of ips and requires the target to have CIDR notation. port_scan() targets a single ip.
+   -to | TIMEOUT | net_scan | yes | Sets the Timeout of the scapy sr1() scan. Proper timeout value depends on the amount of hosts being scanned. Defaults to 5 seconds.
+   --port | TYPE | port_scan | yes | Tells script to run a port_scan() instead of the default net-scan()
    
    ### ---> print_net_scan(active_hosts)
    ###### Formats the results of a net_scan.
