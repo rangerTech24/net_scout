@@ -35,7 +35,7 @@
    ```
    
    Flag | Name | Scan Type | Optional | Description
-   --- | --- | --- | --- | ---
+   :---:| --- | --- | --- | ---
    -m  | MAX | port_scan | yes | a P_S scans from port 1 ---> MAX. Defaults to 1024.
    -t  | TARGET | both | no |N_S targets a range of ips & P_S targets one ip.
    -to | TIMEOUT | net_scan | yes | Timeout of scapy sr1() scan. Defaults to 5 seconds.
